@@ -75,6 +75,7 @@ module Mina
           fi;
 
           echo "Starting Unicorn...";
+          echo "cd #{deploy_to}/#{current_path} && BUNDLE_GEMFILE=#{bundle_gemfile} #{unicorn_cmd} -c #{unicorn_config} -E #{unicorn_env} -D;"
           cd #{deploy_to}/#{current_path} && BUNDLE_GEMFILE=#{bundle_gemfile} #{unicorn_cmd} -c #{unicorn_config} -E #{unicorn_env} -D;
         %
       end
@@ -83,7 +84,7 @@ module Mina
       #
       def restart_unicorn
         %Q%
-          #{duplicate_unicorn}
+        #{duplicate_unicorn}
 
           sleep #{unicorn_restart_sleep_time}; # in order to wait for the (old) pidfile to show up
 
